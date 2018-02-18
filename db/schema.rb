@@ -15,21 +15,27 @@ ActiveRecord::Schema.define(version: 20180216223033) do
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "code"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "flashcards", force: :cascade do |t|
     t.text "info"
+    t.integer "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_flashcards_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_students_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|

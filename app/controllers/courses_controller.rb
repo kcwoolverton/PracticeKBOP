@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
     def index
         @user = User.find(params[:user_id])
         proper_user(@user)
+        @courses = @user.courses
     end
 
     def show
