@@ -1,4 +1,3 @@
 class Student < ApplicationRecord
-    belongs_to :class
-    has_one :flashcard, dependent: :destroy
+    belongs_to :course
 end

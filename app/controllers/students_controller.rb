@@ -1,4 +1,11 @@
 class StudentsController < ApplicationController
+    def index
+        @user = User.find(params[:user_id])
+        proper_user(@user)
+        @course = @user.courses.find(params[:course_id])
+        @students = @course.students
+    end
+
     def new
         @user = User.find(params[:user_id])
         proper_user(@user)
@@ -11,13 +18,17 @@ class StudentsController < ApplicationController
         proper_user(@user)
         @course = @user.courses.find(params[:course_id])
         @student = @course.students.create(student_params)
-        redirect_to user_course_path(@user, @course)
+        if @student.save
+            redirect_to user_course_student_path(@user, @course, @student)
+        else
+            render 'new'
+      end
     end
 
     def show
         @user = User.find(params[:user_id])
         proper_user(@user)
-        @course = @user.courses.find(params[:id])
+        @course = @user.courses.find(params[:course_id])
         @student = @course.students.find(params[:id])
     end
 
